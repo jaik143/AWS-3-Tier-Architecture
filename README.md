@@ -9,7 +9,7 @@ This project showcases a **production-grade 3-tier web application deployment on
 ---
 ## Architecture Diagram 
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./images/architecture.png)
 
 ---
 
@@ -109,7 +109,7 @@ This project showcases a **production-grade 3-tier web application deployment on
   - [Step 9: DNS Configuration](#step-9-dns-configuration)
   - [Step 10: Monitoring Setup](#step-10-monitoring-setup)
   - [Step 11: Security & Compliance](#step-11-security--compliance)
-  - [Step 12: Content Delivery & Protection](#step-12-content-delivery--protection)
+  - [Step 12: Content Delivery & Protection](#step-12-content-delivery)
 
 ## Prerequisites
 - AWS Account with Administrator permissions
@@ -121,12 +121,22 @@ This project showcases a **production-grade 3-tier web application deployment on
 
 ### Step 1: Clone Repository
 ```bash
-git clone <your-repository-url>
-cd <project-directory>
+git clone https://github.com/jaik143/AWS-Three-Tier-Architecture.git >
+cd application-code/app-tier
+
 ```
+- [Test App-Server Commands](./app-server-commands)  
+  *(Click to view step-by-step setup and installation commands)*
+
+```bash
+cd application-code/app-tier
+```
+- [Test Web-Server Commands](./web-server-commands)  
+  *(Click to view step-by-step setup and installation commands)*
 
 
-## Step 2 Creating S3 Buckets
+
+### Step 2: Create S3 Buckets
 
 ### Required Buckets
 
@@ -150,9 +160,9 @@ Both buckets are configured with:
 - Resource-based access policies
 - AWS recommended bucket policies
 
-![App Screenshot](https://via.placeholder.com/468x300?text=App+Screenshot+Here)
+![App Screenshot](./images/step2.png)
 
-## Step-3-Iam-role-setup
+### Step 3: IAM Role Setup
 
 ### Required Roles
 
@@ -189,8 +199,9 @@ All roles include:
 - Resource-level restrictions
 - AWS-recommended access patterns
 
+![App Screenshot](./images/step3.png)
 
-## 🔌 Step 4: Network Setup (AWS Console)
+### Step 4: Network Infrastructure
 
 ## 🧱 VPC Configuration
 - **CIDR Block**: `10.0.0.0/16`
@@ -222,7 +233,8 @@ All roles include:
 - **Destination**: Existing S3 bucket  
 - **Traffic Capture**: All traffic (Accepted, Rejected, All)
 
-## 🔐 Step 5: Create Security Groups
+![App Screenshot](./images/step4.png)
+### Step 5: Security Groups
 
 - **External-Load-Balancer-SG**
   - Inbound Rule: HTTP (80) from `0.0.0.0/0`
@@ -238,8 +250,8 @@ All roles include:
 
 - **DB-Tier-SG**
   - Inbound Rule: MySQL (3306) from `App-Tier-SG`
-
-## Step 6: 📦 Database Configuration
+![App Screenshot](./images/step5.png)
+### Step 6: Database Setup
 
 This document outlines the configuration for the database layer of the infrastructure, including subnet groups and Amazon RDS setup.
 
@@ -274,14 +286,14 @@ The DB Subnet Group is designed to provide isolated and high-availability networ
 | **Backup Retention**   | 7 days (Dev) / 35 days (Prod) |
 
 ---
-
-## 🧪 Step 7: Create Test App Server, Install Packages, and Test Connections
+![App Screenshot](./images/step6.png)
+### Step 7: App Server Deployment
 
 This step sets up a basic application server environment to validate infrastructure components before scaling to production.
 
 ### ✅ Tasks
 
-- [Test App-Server Commands](./Test-App-Server-Commands.md)  
+- [Test App-Server Commands](./app-server-commands)  
   *(Click to view step-by-step setup and installation commands)*
 
 - Create an **AMI** from the configured test server.
@@ -299,14 +311,14 @@ This step sets up a basic application server environment to validate infrastruct
 - Upload the updated `nginx.conf` file to an **S3 bucket** for later retrieval.
 
 ---
-
-## 🌐 Step 8: Create Test Web Server, Install Packages, and Test Connections
+![App Screenshot](./images/step7.png)
+### Step 8: Web Server Deployment
 
 This step provisions a test web server to host frontend applications and validate external access and scaling.
 
 ### ✅ Tasks
 
-- [Test Web-Server Commands](./Test-Web-Server-Commands.md)  
+- [Test Web-Server Commands](./web-server-commands)  
   *(Click to view step-by-step setup and installation commands)*
 
 - Create an **AMI** from the configured test web server.
@@ -320,8 +332,8 @@ This step provisions a test web server to host frontend applications and validat
 - Create an **Auto Scaling Group** linked to the launch template and target group.
 
 ---
-
-## 🌍 Step 9: Add External ALB DNS Record in Route 53
+![App Screenshot](./images/step8.png)
+### Step 9: DNS Configuration
 
 This step connects your external Application Load Balancer (ALB) to a custom domain name using Amazon Route 53.
 
@@ -336,7 +348,7 @@ This step connects your external Application Load Balancer (ALB) to a custom dom
 
 ---
 
-## 📊 Step 10: Create CloudWatch Alarms with SNS Integration
+### Step 10: Monitoring Setup
 
 Set up monitoring and alerting by creating CloudWatch alarms and linking them to SNS topics for notification delivery.
 
@@ -356,8 +368,8 @@ Set up monitoring and alerting by creating CloudWatch alarms and linking them to
 > Subscribe email addresses or other endpoints to receive alerts from these topics.
 
 ---
-
-## 🛡️ Step 11: Create CloudTrail
+![App Screenshot](./images/step10.png)
+### Step 11: Security & Compliance
 
 Enable AWS CloudTrail to record and monitor account activity across your infrastructure for auditing and security purposes.
 
@@ -372,7 +384,8 @@ Enable AWS CloudTrail to record and monitor account activity across your infrast
 > CloudTrail helps ensure compliance, security auditing, and troubleshooting by capturing detailed API activity.
 
 ---
-## 🌐 Step 12: Create CloudFront
+![App Screenshot](./images/step11.png)
+### Step 12: Content Delivery
 
 Use Amazon CloudFront to deliver your web content securely and with low latency via a global content delivery network (CDN).
 
@@ -386,5 +399,16 @@ Use Amazon CloudFront to deliver your web content securely and with low latency 
 - Optionally enable **WAF (Web Application Firewall)** for extra security.
 
 > CloudFront improves global performance and adds an extra layer of protection for your web application.
+
+---
+![App Screenshot](./images/step12.png)
+
+---
+
+## 📬 Contact
+
+For questions, feedback, or collaboration opportunities, feel free to reach out:
+
+**Email**: [jayanthkumarkadali25@gmail.com](mailto:jayanthkumarkadali25@gmail.com)
 
 ---
