@@ -121,7 +121,7 @@ This project showcases a **production-grade 3-tier web application deployment on
 
 ### Step 1: Clone Repository
 ```bash
-git clone https://github.com/jaik143/AWS-Three-Tier-Architecture.git >
+git clone https://github.com/jaik143/AWS-3-Tier-Architecture.git
 cd application-code/app-tier
 
 ```
@@ -409,6 +409,7 @@ Use Amazon CloudFront to deliver your web content securely and with low latency 
 
 For questions, feedback, or collaboration opportunities, feel free to reach out:
 
-**Email**: [jayanthkumarkadali25@gmail.com](mailto:jayanthkumarkadali25@gmail.com)
+**GitHub**: [jaik143](https://github.com/jaik143)  
+**LinkedIn**: [Jayanth Kumar Kadali](https://www.linkedin.com/in/jayanth-kadali-419798182)
 
 ---
