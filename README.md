@@ -34,6 +34,16 @@ This project showcases a **production-grade 3-tier web application deployment on
 ✅ Integrate Notification Mechanisms using Amazon SNS for system alerts and monitoring
 
 ---
+## Architecture Decisions
+
+- **Tier isolation:** the web, application, and database layers use separate subnets and security groups so traffic is permitted only along the required path.
+- **High availability:** web and application capacity spans multiple Availability Zones and the database uses a Multi-AZ deployment.
+- **Private application/database tiers:** only the external load balancer is internet-facing; internal services remain behind private routing and security-group boundaries.
+- **Operational visibility:** CloudWatch, CloudTrail, VPC Flow Logs, and SNS provide metrics, audit history, network visibility, and alerts.
+- **Edge protection:** CloudFront and AWS WAF add caching and request filtering before traffic reaches the origin.
+
+---
+
 # AWS Infrastructure Components
 
 ## Core Components
@@ -112,16 +122,19 @@ This project showcases a **production-grade 3-tier web application deployment on
   - [Step 12: Content Delivery & Protection](#step-12-content-delivery)
 
 ## Prerequisites
-- AWS Account with Administrator permissions
-- AWS CLI installed and configured
-- GitHub repository cloned locally
+- AWS account or sandbox environment with permissions scoped to the services used by this project
+- AWS CLI installed and authenticated with temporary credentials where possible
+- Git installed locally
 - Application code ready for deployment
+
+> For a learning/lab environment, avoid using the AWS root user and avoid storing long-lived access keys in the repository. Review the resources in this guide before deployment because services such as NAT Gateway, RDS, ALB and CloudFront can incur charges.
 
 ## Deployment Steps
 
 ### Step 1: Clone Repository
 ```bash
 git clone https://github.com/jaik143/AWS-3-Tier-Architecture.git
+cd AWS-3-Tier-Architecture
 cd application-code/app-tier
 
 ```
@@ -402,6 +415,12 @@ Use Amazon CloudFront to deliver your web content securely and with low latency 
 
 ---
 ![App Screenshot](./images/step12.png)
+
+---
+
+## Cost & Cleanup
+
+After testing, remove resources that continue to incur charges. Pay particular attention to NAT Gateways, Application Load Balancers, RDS instances, public IPv4 addresses, CloudFront distributions, and retained logs/snapshots. Verify dependencies before deleting shared resources.
 
 ---
 
